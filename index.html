@@ -3,117 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💌 Gacha Message Cute 💌</title>
+    <title>Minimalist Gacha App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         /* ========================================= */
-        /* BAGIAN CSS - UNTUK TAMPILAN CLEAN & CUTIE */
+        /* COLOR PALETTE & RESET */
         /* ========================================= */
+        :root {
+            --bg-white: #ffffff;
+            --light-pink: #f8b6cc;
+            --soft-pink: #f290b3;
+            --bold-pink: #ef7aa4;
+            /* Warna sekunder untuk aksen kecil */
+            --accent-blue: #6eaff0;
+            --accent-green: #f8b6cc;
+            --text-dark: #f290b3;
+        }
 
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            /* Background tetap pink pastel kesukaanmu */
-            background-color: #ef7aa4; 
             margin: 0;
-            
-            /* --- INI KUNCI FONT HELVETICA & iOS --- */
-            /* Kami utamakan Helvetica Neue, lalu Helvetica biasa, lalu San Francisco (iOS default), baru font pendukung. */
-            font-family: 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-            
-            color: #ef7aa4; /* Warna teks general lebih soft */
+            padding: 0;
+            background-color: var(--bg-white);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+            /* Pattern dots menggunakan pink transparan */
+            background-image: radial-gradient(rgba(242, 144, 179, 0.2) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+
+        /* ========================================= */
+        /* STACKED CARDS CONTAINER */
+        /* ========================================= */
+        .cards-container {
+            position: relative;
+            width: 100%;
+            max-width: 340px;
+            height: 420px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
 
         .card {
-            background: white;
-            /* Padding lebih besar biar lapang (Clean) */
-            padding: 40px 30px; 
-            /* Sudut lebih bulat (Cuter/iOS look) */
-            border-radius: 25px; 
-            /* Bayangan super halus (Minimalist/Clean) */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
-            
-            text-align: center;
-            max-width: 320px;
-            width: 85%; /* Responsif di layar HP */
+            position: absolute;
+            width: 300px;
+            height: 380px;
+            border-radius: 16px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .card h2 {
-            margin-top: 0;
-            margin-bottom: 25px;
-            font-weight: 700;
-            font-size: 24px;
-            letter-spacing: -0.5px; /* Sedikit rapat ala iOS */
+        /* Kartu Paling Belakang (Pink Tua) */
+        .card-back-2 {
+            background-color: var(--bold-pink);
+            transform: translateY(-30px) rotate(-3deg) scale(0.9);
+            z-index: 1;
+            box-shadow: 0 10px 20px rgba(239, 122, 164, 0.2);
+        }
+
+        /* Kartu Tengah (Pink Muda) */
+        .card-back-1 {
+            background-color: var(--light-pink);
+            transform: translateY(-15px) rotate(2deg) scale(0.95);
+            z-index: 2;
+            box-shadow: 0 10px 20px rgba(248, 182, 204, 0.2);
+        }
+
+        /* Kartu Utama (Putih) */
+        .card-front {
+            background-color: var(--bg-white);
+            border: 2px solid var(--text-dark);
+            transform: translateY(0) scale(1);
+            z-index: 3;
+            box-shadow: 8px 8px 0px rgba(26, 26, 26, 0.08);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            box-sizing: border-box;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .card-front:active {
+            transform: translateY(4px) scale(0.98);
+            box-shadow: 4px 4px 0px rgba(26, 26, 26, 0.08);
+        }
+
+        /* ========================================= */
+        /* CARD INNER LAYOUT */
+        /* ========================================= */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1.5px solid #eee;
+        }
+
+        .profile-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Aksen Biru diaplikasikan di sini */
+        .profile-dot {
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .menu-dots {
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        /* Area Konten Utama */
+        #content-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: opacity 0.2s ease;
+        }
+
+        .card-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
         }
 
         #hasil-gacha {
-            margin-top: 10px;
-            margin-bottom: 30px;
-            font-size: 19px;
-            line-height: 1.4; /* Jarak antar baris teks biar enak dibaca */
-            font-weight: 600; /* Sedikit tebal tapi gak bold banget */
-            color: #f290b3;
-            min-height: 50px; /* Jaga space biar gak loncat-loncat */
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin: 0;
+            color: var(--text-dark);
         }
 
-        button {
-            /* Warna tombol tetap, diperhalus */
-            background-color: #ef7aa4; 
-            color: white;
-            border: none;
-            /* Padding tombol lebih proporsional */
-            padding: 14px 30px; 
-            font-size: 17px;
+        /* Area Footer */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+
+        .footer-text {
+            font-size: 10px;
             font-weight: 600;
-            border-radius: 12px; /* Sudut tombol lebih modern/iOS */
-            cursor: pointer;
-            width: 100%; /* Tombol full width di dalam kartu */
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            box-shadow: 0 4px 10px rgba(255, 107, 129, 0.2); /* Sedikit glow warna tombol */
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            color: #f8b6cc;
         }
 
-        button:hover {
-            background-color: #ef7aa4;
+        .date-box {
+            text-align: right;
+            line-height: 0.8;
+        }
+
+        .date-day {
+            font-size: 28px;
+            font-weight: 800;
+            display: block;
+        }
+
+        /* Aksen Hijau diaplikasikan di sini */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #f8b6cc;
+        }
+
+        .footer-dynamic-box {
+            text-align: right;
+            line-height: 1;
+        }
+
+        #teks-footer {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            color: var(--accent-green); /* Aksen hijau untuk judul footer */
+            text-transform: uppercase;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Hint di luar kartu (Disamakan ke Pink biar nggak keramean warna) */
+        .tap-hint-outer {
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--soft-pink);
+            letter-spacing: -0.2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
         
-        /* Efek ditekan ala tombol iPhone */
-        button:active {
-            transform: scale(0.97);
+        .mail-icon {
+            font-size: 20px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
         }
 
     </style>
 </head>
 <body>
 
-    <!-- ========================================= -->
-    <!-- BAGIAN HTML - STRUKTUR HALAMAN -->
-    <!-- ========================================= */ -->
-    <div class="card">
-        <h2>ADOLE GACHA MAIL</h2>
-        <div id="hasil-gacha">kak gem kak gem kata-kata hari ini dong</div>
-        <button onclick="acakPesan()">spill hokiku min</button>
+    <div class="cards-container">
+        <!-- Tumpukan Kartu Belakang -->
+        <div class="card card-back-2"></div>
+        <div class="card card-back-1"></div>
+        
+        <!-- Kartu Utama -->
+        <div class="card card-front" onclick="acakPesan()">
+            <div class="card-header">
+                <div class="profile-group">
+                    <div class="profile-dot"></div>
+                    <span class="brand-name">(un)stupid generator</span>
+                </div>
+                <span class="menu-dots">•••</span>
+            </div>
+            
+            <div id="content-wrapper">
+                <h2 id="hasil-gacha">tap the card to get a random topic when your mind goes blank because of love.</h2>
+            </div>
+            
+            <div class="card-footer">
+                <span class="footer-text">ADOLESCENCE<br>TALE</span>
+                <div class="footer-dynamic-box">
+                    <span id="teks-footer">START NOW</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tap-hint-outer">
+            <span>TAP TO DRAW</span>
+            <div class="mail-icon">💌</div>
+        </div>
     </div>
 
-    <!-- ========================================= -->
-    <!-- BAGIAN JAVASCRIPT - LOGIKA GACHA (SAMA) -->
-    <!-- ========================================= */ -->
     <script>
-        // Daftar pesan, kamu bisa tambah di sini
-        const pesan = [
-            "aku bertemu dengan fufufafa",
-            "aku menang owo cf 100000",
-            "adole lancar sampai last day yuhu",
-            "apa lagi yah",
-            "aku cinta pacarku :cihuy:"
+        // Data Gacha: Dipisah antara Pertanyaan Utama dan Footer
+        const gachaData = [
+            { 
+                utama: "If you saw someone else trying to steal your crush, what would you do to make your crush choose you in the end?", 
+                footer: "my way" 
+            },
+            { 
+                utama: "If you were to describe your ideal relationship, what would you hope it would be like?", 
+                footer: "u + me = < 3" 
+            },
+            { 
+                utama: "Have you ever fallen in love at first sight so intensely it left you absolutely drop-dead, even though you’d only just met that person?", 
+                footer: "drop dead" 
+            },
+            { 
+                utama: "Have you ever been disappointed by your own expectations?", 
+                footer: "expectations" 
+            },
+            { 
+                utama: "What scares you the most about love: being left behind, things changing, or feeling like you’re not enough for someone?", 
+                footer: "less" 
+            }
         ];
 
         function acakPesan() {
-            // Pilih angka acak
-            const nomorAcak = Math.floor(Math.random() * pesan.length);
-            // Tampilkan pesannya ke layar
-            document.getElementById("hasil-gacha").innerText = pesan[nomorAcak];
+            const konten = document.getElementById("content-wrapper");
+            const footer = document.getElementById("teks-footer");
+            
+            // Fade out teks utama dan footer
+            konten.classList.remove("fade-in-up");
+            konten.style.opacity = "0";
+            footer.style.opacity = "0";
+
+            // Pilih data acak
+            const nomorAcak = Math.floor(Math.random() * gachaData.length);
+            const dataTerpilih = gachaData[nomorAcak];
+            
+            // Ganti teks dan jalankan Fade in
+            setTimeout(() => {
+                document.getElementById("hasil-gacha").innerText = dataTerpilih.utama;
+                document.getElementById("teks-footer").innerText = dataTerpilih.footer;
+                
+                konten.style.opacity = "1";
+                konten.classList.add("fade-in-up");
+                footer.style.opacity = "1";
+            }, 200);
         }
     </script>
 
