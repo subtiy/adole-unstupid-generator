@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 Gacha Message Cute 💌</title>
+    <style>
+        /* ========================================= */
+        /* BAGIAN CSS - UNTUK TAMPILAN CLEAN & CUTIE */
+        /* ========================================= */
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            /* Background tetap pink pastel kesukaanmu */
+            background-color: #ef7aa4; 
+            margin: 0;
+            
+            /* --- INI KUNCI FONT HELVETICA & iOS --- */
+            /* Kami utamakan Helvetica Neue, lalu Helvetica biasa, lalu San Francisco (iOS default), baru font pendukung. */
+            font-family: 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            
+            color: #ef7aa4; /* Warna teks general lebih soft */
+        }
+
+        .card {
+            background: white;
+            /* Padding lebih besar biar lapang (Clean) */
+            padding: 40px 30px; 
+            /* Sudut lebih bulat (Cuter/iOS look) */
+            border-radius: 25px; 
+            /* Bayangan super halus (Minimalist/Clean) */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            
+            text-align: center;
+            max-width: 320px;
+            width: 85%; /* Responsif di layar HP */
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: -0.5px; /* Sedikit rapat ala iOS */
+        }
+
+        #hasil-gacha {
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-size: 19px;
+            line-height: 1.4; /* Jarak antar baris teks biar enak dibaca */
+            font-weight: 600; /* Sedikit tebal tapi gak bold banget */
+            color: #f290b3;
+            min-height: 50px; /* Jaga space biar gak loncat-loncat */
+        }
+
+        button {
+            /* Warna tombol tetap, diperhalus */
+            background-color: #ef7aa4; 
+            color: white;
+            border: none;
+            /* Padding tombol lebih proporsional */
+            padding: 14px 30px; 
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 12px; /* Sudut tombol lebih modern/iOS */
+            cursor: pointer;
+            width: 100%; /* Tombol full width di dalam kartu */
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 4px 10px rgba(255, 107, 129, 0.2); /* Sedikit glow warna tombol */
+        }
+
+        button:hover {
+            background-color: #ef7aa4;
+        }
+        
+        /* Efek ditekan ala tombol iPhone */
+        button:active {
+            transform: scale(0.97);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ========================================= -->
+    <!-- BAGIAN HTML - STRUKTUR HALAMAN -->
+    <!-- ========================================= */ -->
+    <div class="card">
+        <h2>ADOLE GACHA MAIL</h2>
+        <div id="hasil-gacha">kak gem kak gem kata-kata hari ini dong</div>
+        <button onclick="acakPesan()">spill hokiku min</button>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- BAGIAN JAVASCRIPT - LOGIKA GACHA (SAMA) -->
+    <!-- ========================================= */ -->
+    <script>
+        // Daftar pesan, kamu bisa tambah di sini
+        const pesan = [
+            "aku bertemu dengan fufufafa",
+            "aku menang owo cf 100000",
+            "adole lancar sampai last day yuhu",
+            "apa lagi yah",
+            "aku cinta pacarku :cihuy:"
+        ];
+
+        function acakPesan() {
+            // Pilih angka acak
+            const nomorAcak = Math.floor(Math.random() * pesan.length);
+            // Tampilkan pesannya ke layar
+            document.getElementById("hasil-gacha").innerText = pesan[nomorAcak];
+        }
+    </script>
+
+</body>
+</html>
